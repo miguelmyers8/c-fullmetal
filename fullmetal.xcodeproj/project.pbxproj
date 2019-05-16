@@ -25,6 +25,7 @@
 /* Begin PBXFileReference section */
 		49601C89227FEF3A0048F4EA /* fullmetal */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = fullmetal; sourceTree = BUILT_PRODUCTS_DIR; };
 		49601C8C227FEF3A0048F4EA /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		49601C93227FF8DE0048F4EA /* Tensor.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Tensor.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,6 +59,7 @@
 			isa = PBXGroup;
 			children = (
 				49601C8C227FEF3A0048F4EA /* main.cpp */,
+				49601C93227FF8DE0048F4EA /* Tensor.h */,
 			);
 			path = fullmetal;
 			sourceTree = "<group>";
@@ -217,7 +219,14 @@
 		49601C91227FEF3A0048F4EA /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
 				DEVELOPMENT_TEAM = CYZA5695HY;
+				HEADER_SEARCH_PATHS = /Users/miguel/anaconda/envs/py36/include/;
+				OTHER_LDFLAGS = (
+					"-lblas",
+					"-llapack",
+					"-DHAVE_CBLAS=1",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -225,7 +234,14 @@
 		49601C92227FEF3A0048F4EA /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
 				DEVELOPMENT_TEAM = CYZA5695HY;
+				HEADER_SEARCH_PATHS = /Users/miguel/anaconda/envs/py36/include/;
+				OTHER_LDFLAGS = (
+					"-lblas",
+					"-llapack",
+					"-DHAVE_CBLAS=1",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
