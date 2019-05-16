@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		49601C8D227FEF3A0048F4EA /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 49601C8C227FEF3A0048F4EA /* main.cpp */; };
+		49BE53E0228D097C00A2D9F4 /* Tensor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 49BE53DE228D097C00A2D9F4 /* Tensor.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -25,7 +26,8 @@
 /* Begin PBXFileReference section */
 		49601C89227FEF3A0048F4EA /* fullmetal */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = fullmetal; sourceTree = BUILT_PRODUCTS_DIR; };
 		49601C8C227FEF3A0048F4EA /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
-		49601C93227FF8DE0048F4EA /* Tensor.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Tensor.h; sourceTree = "<group>"; };
+		49BE53DE228D097C00A2D9F4 /* Tensor.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Tensor.cpp; sourceTree = "<group>"; };
+		49BE53DF228D097C00A2D9F4 /* Tensor.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Tensor.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -59,7 +61,8 @@
 			isa = PBXGroup;
 			children = (
 				49601C8C227FEF3A0048F4EA /* main.cpp */,
-				49601C93227FF8DE0048F4EA /* Tensor.h */,
+				49BE53DE228D097C00A2D9F4 /* Tensor.cpp */,
+				49BE53DF228D097C00A2D9F4 /* Tensor.hpp */,
 			);
 			path = fullmetal;
 			sourceTree = "<group>";
@@ -122,6 +125,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				49BE53E0228D097C00A2D9F4 /* Tensor.cpp in Sources */,
 				49601C8D227FEF3A0048F4EA /* main.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -265,6 +269,7 @@
 				49601C92227FEF3A0048F4EA /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
