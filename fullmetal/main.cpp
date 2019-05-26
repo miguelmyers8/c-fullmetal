@@ -12,18 +12,29 @@
 #include <xtensor-blas/xlinalg.hpp>
 #include <typeinfo>
 #include <tuple>
+#include <string>
 
-auto aa = xt::random::randn<double> ({2, 2});
-auto bb = xt::random::randn<double> ({2, 2});
 
-xt::xarray<double> k = {{ 11, 12, 13 }};
-xt::xarray<double> l = {  1,  2,  3 };
-auto v = k+l;
 
 int main(int argc, const char * argv[]) {
-    Tensor t1(aa);
-    //cout<<t1<<endl;
-    Tensor x = add(t1,t1);
-    cout<<x<<endl;
+    
+    auto aa = xt::random::randn<double> ({2, 2});
+    auto bb = xt::random::randn<double> ({2, 2});
+    
+    xt::xarray<double> k = {{ 11, 12, 13 }};
+    xt::xarray<double> l = {  1,  2,  3 };
+    auto v = k+l;
+    
+    auto add_grad = [&] (xt::xarray<double> y) {
+        xt::xarray<double> j  = aa + y;
+        return j;
+    };
+ 
+    
+    Tensor t1(k);
+    
+    Dependancies b(t1,add_grad);
+    
+    cout << b.grad_fn(bb);
         return 0;
 }

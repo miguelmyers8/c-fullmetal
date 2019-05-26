@@ -225,7 +225,10 @@
 			buildSettings = {
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
 				DEVELOPMENT_TEAM = CYZA5695HY;
-				HEADER_SEARCH_PATHS = /Users/miguel/anaconda/envs/py36/include/;
+				HEADER_SEARCH_PATHS = (
+					/Users/miguel/anaconda/envs/py36/include/,
+					/usr/local/Cellar/boost/1.69.0_2/include/,
+				);
 				OTHER_LDFLAGS = (
 					"-lblas",
 					"-llapack",
@@ -240,7 +243,10 @@
 			buildSettings = {
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
 				DEVELOPMENT_TEAM = CYZA5695HY;
-				HEADER_SEARCH_PATHS = /Users/miguel/anaconda/envs/py36/include/;
+				HEADER_SEARCH_PATHS = (
+					/Users/miguel/anaconda/envs/py36/include/,
+					/usr/local/Cellar/boost/1.69.0_2/include/,
+				);
 				OTHER_LDFLAGS = (
 					"-lblas",
 					"-llapack",
