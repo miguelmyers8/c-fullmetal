@@ -13,28 +13,28 @@
 #include <typeinfo>
 #include <tuple>
 #include <string>
+#include <optional>
 
+auto aa = xt::random::randn<double> ({2, 2});
+auto bb = xt::random::randn<double> ({2, 2});
+
+xt::xarray<double> k = {{ 11, 12, 13 }};
+xt::xarray<double> l = {  1,  2,  3 };
+auto v = k+l;
 
 
 int main(int argc, const char * argv[]) {
     
-    auto aa = xt::random::randn<double> ({2, 2});
-    auto bb = xt::random::randn<double> ({2, 2});
     
-    xt::xarray<double> k = {{ 11, 12, 13 }};
-    xt::xarray<double> l = {  1,  2,  3 };
-    auto v = k+l;
+    Tensor t2(k,true);
+    //Tensor t3(full_like(k, 0.));
+    //t2.grad = &t3;
+    //cout<<t2<<endl;
+    //cout<<*t2.grad<<endl;
+    Tensor x = t2+t2;
+    for (const Dependancies& i : x.depend_on) // access by const reference
+        std::cout << i << ' '<<endl;
+    //cout << t2.depend_on << " here "<<endl;
     
-    auto add_grad = [&] (xt::xarray<double> y) {
-        xt::xarray<double> j  = aa + y;
-        return j;
-    };
- 
-    
-    Tensor t1(k);
-    
-    Dependancies b(t1,add_grad);
-    
-    cout << b.grad_fn(bb);
         return 0;
 }

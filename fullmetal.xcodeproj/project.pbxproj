@@ -108,6 +108,7 @@
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				English,
 				en,
 			);
 			mainGroup = 49601C80227FEF3A0048F4EA;
@@ -223,7 +224,7 @@
 		49601C91227FEF3A0048F4EA /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
 				DEVELOPMENT_TEAM = CYZA5695HY;
 				HEADER_SEARCH_PATHS = (
 					/Users/miguel/anaconda/envs/py36/include/,
@@ -241,7 +242,7 @@
 		49601C92227FEF3A0048F4EA /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
 				DEVELOPMENT_TEAM = CYZA5695HY;
 				HEADER_SEARCH_PATHS = (
 					/Users/miguel/anaconda/envs/py36/include/,

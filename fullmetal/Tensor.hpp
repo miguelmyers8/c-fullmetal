@@ -15,12 +15,14 @@
 #include <xtensor-blas/xlinalg.hpp>
 #include <boost/variant/variant.hpp>
 #include <tuple>
-
+#include <vector>
+#include <optional>
+#include <memory>
 using namespace std;
 
 
-
-
+class Tensor;
+class Dependancies;
 
 
 class Tensor {
@@ -29,12 +31,15 @@ class Tensor {
     
         xt::xarray<double> data;
         xt::svector<size_t> shape;
-        xt::xarray<double> grad;
+        std::vector<Dependancies> depend_on;
+        shared_ptr<Tensor>grad;
         bool requires_grad;
     
         Tensor();
 
-        Tensor(xt::xarray<double> a, bool b = false); // constructor
+        Tensor(xt::xarray<double> a, bool b = false, std::vector<Dependancies> d = {} ); // constructor
+    
+        ~Tensor();
     
         friend std::ostream& operator<<(std::ostream &strm, const Tensor &a); // stream overload
     
@@ -46,7 +51,7 @@ class Tensor {
     
         friend Tensor add(Tensor t1, Tensor t2); // add funtion will be called from operator+
 
-    
+        void zero_grad();
 };
 
 
@@ -56,9 +61,17 @@ class Dependancies{
     
         Tensor tenor;
     
+        string name;
+    
         std::function<xt::xarray<double>( xt::xarray<double> )> grad_fn;
     
-        Dependancies(Tensor a,  std::function<xt::xarray<double>( xt::xarray<double> )> b);
+        Dependancies();
+    
+        Dependancies(Tensor a,  std::function<xt::xarray<double>( xt::xarray<double> )> b, string c);
+    
+        ~Dependancies();
+    
+        friend std::ostream& operator<<(std::ostream &strm, const Dependancies &a); // stream overload
 };
 
 
