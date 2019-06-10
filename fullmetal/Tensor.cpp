@@ -67,13 +67,59 @@ void Tensor::zero_grad(){
         std::vector<Dependancies> depends_on = {};
         
         if(t1.requires_grad){
+            
             // grad function: needs finishing
-            auto add_grad_1 = [&] (xt::xarray<double> y) {
-                xt::xarray<double> grad_out = out + y;
-                return grad_out;
+            auto add_grad_1 = [=] (xt::xarray<double> y) {
+                xt::xarray<double> x;
+                xt::svector<size_t> shape = t1.shape;
+                int ndims_added = y.dimension() - t1.data.dimension();
+            //cout<< ndims_added << " ndims_added"<<endl;
+                for (int i = 0; i<= ndims_added; ++i)
+                     x = xt::sum(y, 0);
+            //cout<<x<<" <--grad x"<<endl;
+                for(std::size_t i = 0; i < shape.size(); ++i){
+                    if (shape[i] == 1){
+                        x = xt::sum(x,i+0,xt::keep_dims);
+                    }
+                }
+                return x;
             };
             depends_on.push_back(Dependancies(t1,add_grad_1,"add.<add_grad_1>"));
         };
+        
+        
+        
+         
+         
+         if(t2.requires_grad){
+         
+         // grad function: needs finishing
+         auto add_grad_2 = [=] (xt::xarray<double> y) {
+         
+         xt::xarray<double> x;
+         xt::svector<size_t> shape = t1.shape;
+         int ndims_added = y.dimension() - t2.data.dimension();
+         
+         //cout<< ndims_added << " ndims_added"<<endl;
+         for (int i = 0; i<= ndims_added; ++i)
+         x = xt::sum(y, 0);
+         //cout<<x<<" <--grad x"<<endl;
+         for(std::size_t i = 0; i < shape.size(); ++i){
+         if (shape[i] == 1){
+         x = xt::sum(x,i+0,xt::keep_dims);
+         }
+         }
+         return x;
+         };
+         depends_on.push_back(Dependancies(t1,add_grad_2,"add.<add_grad_2>"));
+         };
+         
+         
+         
+         
+         
+        
+        
         return Tensor(out,requires_grad,depends_on);
     };
 

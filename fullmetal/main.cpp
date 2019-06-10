@@ -20,6 +20,8 @@ auto bb = xt::random::randn<double> ({2, 2});
 
 xt::xarray<double> k = {{ 11, 12, 13 }};
 xt::xarray<double> l = {  1,  2,  3 };
+xt::xarray<double> ll = {6};
+xt::xarray<double> f = {{{ 11, 12, 13 }}};
 auto v = k+l;
 
 
@@ -32,9 +34,14 @@ int main(int argc, const char * argv[]) {
     //cout<<t2<<endl;
     //cout<<*t2.grad<<endl;
     Tensor x = t2+t2;
-    for (const Dependancies& i : x.depend_on) // access by const reference
+    for (const Dependancies& i : x.depend_on){ // access by const reference
         std::cout << i << ' '<<endl;
-    //cout << t2.depend_on << " here "<<endl;
-    
+        i.grad_fn(k);
+        
+    }
+    //int u =1;
+    //int *prt = &u;
+    //xt::xarray<double> uu = xt::sum(k,u+0);
+    //cout<<ll<<endl;
         return 0;
 }
