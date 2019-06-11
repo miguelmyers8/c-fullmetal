@@ -67,59 +67,42 @@ void Tensor::zero_grad(){
         std::vector<Dependancies> depends_on = {};
         
         if(t1.requires_grad){
-            
-            // grad function: needs finishing
+    
             auto add_grad_1 = [=] (xt::xarray<double> y) {
-                xt::xarray<double> x;
+                xt::xarray<double> grad = y;
                 xt::svector<size_t> shape = t1.shape;
                 int ndims_added = y.dimension() - t1.data.dimension();
-            //cout<< ndims_added << " ndims_added"<<endl;
-                for (int i = 0; i<= ndims_added; ++i)
-                     x = xt::sum(y, 0);
-            //cout<<x<<" <--grad x"<<endl;
-                for(std::size_t i = 0; i < shape.size(); ++i){
-                    if (shape[i] == 1){
-                        x = xt::sum(x,i+0,xt::keep_dims);
-                    }
-                }
-                return x;
+                
+                for (int i = 0; i< ndims_added; ++i)
+                     grad = xt::sum(grad, 0);
+                
+                for(std::size_t k = 0; k < shape.size(); ++k)
+                    if (shape[k] == 1)
+                        grad = xt::sum(grad,(k+0),xt::keep_dims);
+                
+                return grad;
             };
+            
             depends_on.push_back(Dependancies(t1,add_grad_1,"add.<add_grad_1>"));
         };
         
-        
-        
-         
-         
          if(t2.requires_grad){
+             auto add_grad_2 = [=] (xt::xarray<double> y) {
+                 xt::xarray<double> grad = y;
+                 xt::svector<size_t> shape = t1.shape;
+                 int ndims_added = y.dimension() - t2.data.dimension();
          
-         // grad function: needs finishing
-         auto add_grad_2 = [=] (xt::xarray<double> y) {
-         
-         xt::xarray<double> x;
-         xt::svector<size_t> shape = t1.shape;
-         int ndims_added = y.dimension() - t2.data.dimension();
-         
-         //cout<< ndims_added << " ndims_added"<<endl;
-         for (int i = 0; i<= ndims_added; ++i)
-         x = xt::sum(y, 0);
-         //cout<<x<<" <--grad x"<<endl;
-         for(std::size_t i = 0; i < shape.size(); ++i){
-         if (shape[i] == 1){
-         x = xt::sum(x,i+0,xt::keep_dims);
-         }
-         }
-         return x;
+                 for (int i = 0; i< ndims_added; ++i)
+                     grad = xt::sum(grad, 0);
+                 
+                 for(std::size_t i = 0; i < shape.size(); ++i)
+                     if (shape[i] == 1)
+                         grad = xt::sum(grad,(i+0),xt::keep_dims);
+                 
+                 return grad ;
+            };
+         depends_on.push_back(Dependancies(t2,add_grad_2,"add.<add_grad_2>"));
          };
-         depends_on.push_back(Dependancies(t1,add_grad_2,"add.<add_grad_2>"));
-         };
-         
-         
-         
-         
-         
-        
-        
         return Tensor(out,requires_grad,depends_on);
     };
 
